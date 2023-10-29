@@ -58,4 +58,4 @@ volumes:
   production_traefik:
 
 networks:
-  main:
+  default:
