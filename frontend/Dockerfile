@@ -7,7 +7,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . ./
-RUN npm run build
+# RUN npm run build
 
 # Now serve the React app with Nginx
 FROM nginx:alpine

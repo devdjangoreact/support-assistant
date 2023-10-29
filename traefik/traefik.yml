@@ -27,13 +27,13 @@ certificatesResolvers:
 
 http:
   routers:
-    liveisgood:
+    frontend:
       rule: "Host(`liveisgood.pp.ua`) || Host(`www.liveisgood.pp.ua`)"
       entryPoints:
         - web-secure
       middlewares:
         - csrf
-      service: liveisgood
+      service: frontend
       tls:
         certResolver: letsencrypt
 
@@ -45,10 +45,11 @@ http:
         hostsProxyHeaders: ["X-CSRFToken"]
 
   services:
-    liveisgood:
+    frontend:
       loadBalancer:
         servers:
           - url: http://frontend:80
+
 
 providers:
   # https://docs.traefik.io/master/providers/file/
