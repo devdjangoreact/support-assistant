@@ -36,7 +36,15 @@ http:
       service: frontend
       tls:
         certResolver: letsencrypt
-
+    backend:
+      rule: "Host(`api.liveisgood.pp.ua`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: backend
+      tls:
+        certResolver: letsencrypt
   middlewares:
     csrf:
       # https://docs.traefik.io/master/middlewares/headers/#hostsproxyheaders
@@ -49,7 +57,10 @@ http:
       loadBalancer:
         servers:
           - url: http://frontend:80
-
+    backend:
+      loadBalancer:
+        servers:
+          - url: http://backend:8000
 
 providers:
   # https://docs.traefik.io/master/providers/file/
