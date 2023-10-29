@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Answer, { AnswerProps } from "./components/Answer";
+import Louder from "./components/Louder";
 
 function App() {
   const [messages, setMessages] = useState<(string | JSX.Element)[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedChatRoom, setSelectedChatRoom] = useState<string>("General");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // Fetch chat messages from the FastAPI backend for the selected chat room whenever it changes
@@ -28,6 +30,7 @@ function App() {
 
   const handleSend = () => {
     if (inputValue.trim() !== "") {
+      setIsLoading(true);
       fetch(
         process.env.REACT_APP_API_ENDPOINT +
           `/ai/chat-room/${selectedChatRoom}/send-message`,
@@ -55,7 +58,8 @@ function App() {
             setInputValue("");
           }
         })
-        .catch((error) => console.error("Error sending message:", error));
+        .catch((error) => console.error("Error sending message:", error))
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -84,7 +88,7 @@ function App() {
 
         {/* Input area */}
         <div className="border-t border-gray-200 p-4">
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 items-center">
             <input
               type="text"
               className="flex-1 p-2 border rounded"
@@ -92,9 +96,11 @@ function App() {
               value={inputValue}
               onChange={handleInputChange}
             />
+            {isLoading && <Louder />}
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded"
               onClick={handleSend}
+              disabled={isLoading} // disable the button when loading
             >
               Send
             </button>
