@@ -18,14 +18,14 @@ class LLMService:
         pass
 
     def get_answer_from_llm(self, input: str) -> llm_schemas.FAQItem:
-        loader = JSONLoader(file_path="backend/datasource/FAQ.json", jq_schema=".[]", text_content=False)
+        loader = JSONLoader(file_path="datasource/FAQ.json", jq_schema=".[]", text_content=False)
         documents = loader.load()
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
         docs = text_splitter.split_documents(documents)
 
         embeddings = OpenAIEmbeddings()
 
-        url = "http://localhost:6333"
+        url = os.environ["QDRANT"]
         qdrant = Qdrant.from_documents(
             docs,
             embeddings,

@@ -40,19 +40,19 @@ services:
       - 6333
     networks:
       - default
-  # traefik:
-  #   build:
-  #     context: .
-  #     dockerfile: ./traefik/Dockerfile
-  #   depends_on:
-  #     - backend
-  #   volumes:
-  #     - production_traefik:/etc/traefik/acme
-  #   ports:
-  #     - "0.0.0.0:80:80"
-  #     - "0.0.0.0:443:443"
-  #   networks:
-  #     - default
+  traefik:
+    build:
+      context: .
+      dockerfile: ./traefik/Dockerfile
+    depends_on:
+      - backend
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    networks:
+      - default
 volumes:
   postgres_data:
   production_traefik:

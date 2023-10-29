@@ -23,5 +23,7 @@ ENV VIRTUAL_ENV=/app/.venv \
 # Copy the content of the local src directory to the working directory
 COPY . /app
 
+EXPOSE 8000
+
 # Specify the command to run on container start
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
