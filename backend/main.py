@@ -6,8 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 app = fastapi.FastAPI()
 
 origins = [
-    "http://localhost:3000",  # React app address
-    # add any other origins you want to whitelist here
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 app.add_middleware(

@@ -1,0 +1,107 @@
+.editorconfig
+.gitattributes
+.github
+.gitignore
+.gitlab-ci.yml
+.idea
+.pre-commit-config.yaml
+.readthedocs.yml
+.travis.yml
+venv
+.git
+
+# Ignore development files and directories
+node_modules
+.cache
+.next
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore build artifacts and logs
+out
+build
+.DS_Store
+npm-debug.log
+yarn-error.log
+
+# virtual environments
+venv
+frontend
+# Python files
+*.pyc
+__pycache__
+/__pycache__/
+__pycache__/
+# Python Notebook dot files
+.ipynb*
+
+# Secret environment settings
+.env
+env
+venv
+./venv
+/venv
+# .env.sample
+local_settings.py.sample
+local_settings.py
+source_code
+/source_code
+./source_code
+# Node and Webpack files
+node_modules
+npm-debug.log
+webpack-stats*
+src
+/node_modules
+
+# Static assests
+staticfiles
+static_cdn
+media_cdn
+backend/static
+frontend/build
+
+# Ignore sqlite
+db.sqlite3
+
+# Apple files
+.DS_Store
+
+.vscode
+.gitignore
+.dockerignore
+README.md
+
+.editorconfig
+.gitattributes
+.github
+.gitignore
+.gitlab-ci.yml
+.idea
+.pre-commit-config.yaml
+.readthedocs.yml
+.travis.yml
+venv
+.git
+
+#######################Nextjs####################
+# Ignore development files and directories
+node_modules
+.cache
+.next
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore build artifacts and logs
+out
+build/
+.DS_Store
+npm-debug.log
+yarn-error.log
+
+
+lab-testing

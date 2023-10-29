@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
+import Answer, { AnswerProps } from "./components/Answer";
 
 function App() {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<(string | JSX.Element)[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedChatRoom, setSelectedChatRoom] = useState<string>("General");
 
@@ -11,7 +12,7 @@ function App() {
     if (selectedChatRoom) {
       fetch(
         process.env.REACT_APP_API_ENDPOINT +
-          `/ai/chat-rooms/${selectedChatRoom}/messages`
+          `/ai/chat-room/${selectedChatRoom}/messages`
       )
         .then((response) => response.json())
         .then((data) => setMessages(data))
@@ -40,14 +41,21 @@ function App() {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data) {
-            setMessages((messages) => [...messages, inputValue, ...data]);
+            const jsonData: AnswerProps = data;
+            setMessages((messages) => [
+              ...messages,
+              inputValue,
+              <Answer
+                answer_plain_text={jsonData.answer_plain_text as string}
+                answer_original={jsonData.answer_original as string}
+                notes={jsonData.notes as string}
+              />,
+            ]);
+            setInputValue("");
           }
         })
         .catch((error) => console.error("Error sending message:", error));
-
-      setInputValue("");
     }
   };
 
