@@ -6,7 +6,7 @@ __pycache__/
 *.egg
 *.egg-info/
 dist/
-build/
+
 *.egg-info/
 *.egg
 *.log
@@ -119,7 +119,7 @@ storybook-static/
 /coverage
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store
